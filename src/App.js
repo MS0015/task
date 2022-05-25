@@ -1,27 +1,56 @@
-import { Button, Col, Input, Row } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
+import axios from "axios";
 
-function handleSubmit() {
-  console.log("handle submit");
+function onFinish(val) {
+  //Send input field value to server via axios
+  console.log("Send post request", val);
+  axios
+    .post("http://127.0.0.1:5000/write", {
+      name: val.name,
+      age: val.age,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+function handleRead() {
+  //Receive file from server and read it
 }
 
 function App() {
   return (
-    <Col>
-      <Row>
-        <Col md={6}>Name : </Col>
-        <Col md={6}>
-          <Input placeholder="Please enter name" />
-        </Col>
-      </Row>
-      <Row>
-        <Col md={6}>Age : </Col>
-        <Col md={6}>
-          <Input placeholder="Please enter age" />
-        </Col>
-      </Row>
+    <Form onFinish={onFinish}>
+      <Form.Item
+        label="Name"
+        name="name"
+        rules={[
+          {
+            required: true,
+            message: "Please input your name!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Age"
+        name="age"
+        rules={[
+          {
+            required: true,
+            message: "Please input your age!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
       <Row gutter={10}>
         <Col>
-          <Button onClick={handleSubmit} type="primary">
+          <Button htmlType="submit" type="primary">
             Submit
           </Button>
         </Col>
@@ -29,7 +58,7 @@ function App() {
           <Button type="dashed">Read Data</Button>
         </Col>
       </Row>
-    </Col>
+    </Form>
   );
 }
 
