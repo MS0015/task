@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Col, Input, Row } from "antd";
+
+function handleSubmit() {
+  console.log("handle submit");
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Col>
+      <Row>
+        <Col md={6}>Name : </Col>
+        <Col md={6}>
+          <Input placeholder="Please enter name" />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>Age : </Col>
+        <Col md={6}>
+          <Input placeholder="Please enter age" />
+        </Col>
+      </Row>
+      <Row gutter={10}>
+        <Col>
+          <Button onClick={handleSubmit} type="primary">
+            Submit
+          </Button>
+        </Col>
+        <Col>
+          <Button type="dashed">Read Data</Button>
+        </Col>
+      </Row>
+    </Col>
   );
 }
 
